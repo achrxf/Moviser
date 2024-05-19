@@ -17,6 +17,32 @@ function fetchMovieData(endpoint, params = {}) {
         .catch(error => console.error('Error fetching data:', error)); // Debugging message
 }
 
+function getRandomMedia() {
+  // Choose between movie and TV show randomly
+  const mediaType = Math.random() < 0.5 ? 'movie' : 'tv';
+  const endpoint = `https://api.themoviedb.org/3/${mediaType}/top_rated`; // Endpoint for top rated media
+
+  return fetchMovieData(endpoint).then(data => {
+      if (!data || !data.results) {
+          console.error('No data or results in the response');
+          return null;
+      }
+      const mediaList = data.results;
+      return mediaList[Math.floor(Math.random() * mediaList.length)];
+  });
+}
+
+function displayMedia(media) {
+  if (!media) {
+      console.error('No media found to display');
+      return;
+  }
+  const mediaCover = document.getElementById('movie-cover');
+  mediaCover.src = `${IMAGE_BASE_URL}${media.poster_path || media.backdrop_path}`;
+  mediaCover.style.display = 'block'; // Show the media cover
+  console.log('Displaying media:', media.title || media.name);
+}
+
 function getRandomMovieFromTMDb() {
   return fetchMovieData('https://api.themoviedb.org/3/movie/popular').then(data => {
       if (!data || !data.results) {
@@ -43,6 +69,13 @@ function displayMovie(movie) {
     localStorage.setItem('lastFetchedMovie', JSON.stringify({ movie, date: today }));
 
 }
+
+document.querySelector('.generate-btn').addEventListener('click', () => {
+  getRandomMedia('movie', 'day').then(media => {
+      displayMedia(media);
+  });
+});
+
 
 document.querySelector('.todays-pick-btn').addEventListener('click', () => {
   fetchAndDisplayRandomMovie();
