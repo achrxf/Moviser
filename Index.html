@@ -43,29 +43,29 @@
             </div>
             <div class="genre">
                 <div class="align-input">
-                    <input type="text" id="search" placeholder="Genre...">
+                    <input type="text" id="genre-search" class="search" placeholder="Genre...">
                 </div>
                 <div class="dropdown">
-                    <div class="options">
-                        <div>Drama</div>
-                        <div>Action</div>
-                        <div>Horror</div>
-                        <div>Comedy</div>
-                        <div>Thriller</div>
-                        <div>Science fiction</div>
-                        <div>Romance</div>
-                        <div>Documentary</div>
-                        <div>Fantasy</div>
-                        <div>Adventure</div>
-                        <div>Animation</div>
-                        <div>Biography</div>
-                        <div>Crime</div>
-                        <div>Family</div>
-                        <div>History</div>
-                        <div>Musical</div>
-                        <div>Mystery</div>
-                        <div>War</div>
-                        <div>Western</div>
+                    <div class="options" onclick="toggleGenre(event)">
+                        <div data-id="28" data-name="Action">Action</div>
+                        <div data-id="12" data-name="Adventure">Adventure</div>
+                        <div data-id="16" data-name="Animation">Animation</div>
+                        <div data-id="35" data-name="Comedy">Comedy</div>
+                        <div data-id="80" data-name="Crime">Crime</div>
+                        <div data-id="99" data-name="Documentary">Documentary</div>
+                        <div data-id="18" data-name="Drama">Drama</div>
+                        <div data-id="10751" data-name="Family">Family</div>
+                        <div data-id="14" data-name="Fantasy">Fantasy</div>
+                        <div data-id="36" data-name="History">History</div>
+                        <div data-id="27" data-name="Horror">Horror</div>
+                        <div data-id="10402" data-name="Music">Music</div>
+                        <div data-id="9648" data-name="Mystery">Mystery</div>
+                        <div data-id="10749" data-name="Romance">Romance</div>
+                        <div data-id="878" data-name="Science Fiction">Science Fiction</div>
+                        <div data-id="10770" data-name="TV Movie">TV Movie</div>
+                        <div data-id="53" data-name="Thriller">Thriller</div>
+                        <div data-id="10752" data-name="War">War</div>
+                        <div data-id="37" data-name="Western">Western</div>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
         <div class="actors-directors">
             <div class="actors">
                 <div class="align-input">
-                    <input type="text" id="search" placeholder="Actors...">
+                    <input type="text" class="search" placeholder="Actors...">
                 </div>
                 <div class="dropdown">
                     <div class="options">
@@ -115,7 +115,7 @@
             </div>
             <div class="directors">
                 <div class="align-input">
-                    <input type="text" id="search" placeholder="Directors...">
+                    <input type="text" class="search" placeholder="Directors...">
                 </div>
                 <div class="dropdown">
                     <div class="options">

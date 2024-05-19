@@ -94,7 +94,7 @@ h3 {
   height: 100%;
 }
 
-#search {
+.search {
   background-color: #d9d9d9;
   height: 12%;
   width: 90%;
@@ -116,6 +116,11 @@ h3 {
   border: none;
   z-index: 1000;
   padding-left: 7%;
+}
+
+.options div.selected {
+  background-color: #580F0F;
+  color: white;
 }
 
 .options div:hover {

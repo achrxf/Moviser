@@ -20,7 +20,10 @@ function fetchMovieData(endpoint, params = {}) {
 function getRandomMedia() {
   const isMovieChecked = document.getElementById('type-movie').checked;
   const isSeriesChecked = document.getElementById('type-series').checked;
+  const selectedGenres = Array.from(document.querySelectorAll('.genre .options div.selected')).map(option => option.dataset.id);
+  
   let mediaType;
+  let endpoint;
 
   if (isMovieChecked && !isSeriesChecked) {
       mediaType = 'movie';
@@ -31,9 +34,18 @@ function getRandomMedia() {
       mediaType = Math.random() < 0.5 ? 'movie' : 'tv';
   }
 
-  const endpoint = `${BASE_URL}/${mediaType}/top_rated`;
+  if (selectedGenres.length > 0) {
+      endpoint = `${BASE_URL}/discover/${mediaType}`;
+  } else {
+      endpoint = `${BASE_URL}/${mediaType}/top_rated`;
+  }
 
-  return fetchMovieData(endpoint).then(data => {
+  const params = {
+      with_genres: selectedGenres.join(','),
+      api_key: API_KEY
+  };
+
+  return fetchMovieData(endpoint, params).then(data => {
       if (!data || !data.results) {
           console.error('No data or results in the response');
           return null;
@@ -42,6 +54,8 @@ function getRandomMedia() {
       return mediaList[Math.floor(Math.random() * mediaList.length)];
   });
 }
+
+
 
 function displayMedia(media) {
   if (!media) {
@@ -87,16 +101,27 @@ function displayMovie(movie) {
 
 }
 
-document.querySelector('.generate-btn').addEventListener('click', () => {
-  getRandomMedia('movie', 'day').then(media => {
-      displayMedia(media);
-  });
-});
-
-
 document.querySelector('.todays-pick-btn').addEventListener('click', () => {
   fetchAndDisplayRandomMovie();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const genreOptionsContainer = document.querySelector('.genre .options div');
+
+  genreOptionsContainer.addEventListener('click', (event) => {
+      if (event.target.tagName === 'DIV') {
+          toggleGenre(event.target);
+      }
+  });
+});
+
+function toggleGenre(option) {
+  if (option.classList.contains('selected')) {
+      option.classList.remove('selected');
+  } else {
+      option.classList.add('selected');
+  }
+}
 
 function fetchAndDisplayRandomMovie() {
   // Check if a movie was already fetched for today
@@ -110,5 +135,13 @@ function fetchAndDisplayRandomMovie() {
       getRandomMovieFromTMDb().then(movie => {
           displayMovie(movie);
       });
+  }
+}
+
+function toggleGenre(event) {
+  if (event.target.classList.contains('selected')) {
+      event.target.classList.remove('selected');
+  } else {
+      event.target.classList.add('selected');
   }
 }
