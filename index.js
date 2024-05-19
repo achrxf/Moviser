@@ -18,9 +18,20 @@ function fetchMovieData(endpoint, params = {}) {
 }
 
 function getRandomMedia() {
-  // Choose between movie and TV show randomly
-  const mediaType = Math.random() < 0.5 ? 'movie' : 'tv';
-  const endpoint = `https://api.themoviedb.org/3/${mediaType}/top_rated`; // Endpoint for top rated media
+  const isMovieChecked = document.getElementById('type-movie').checked;
+  const isSeriesChecked = document.getElementById('type-series').checked;
+  let mediaType;
+
+  if (isMovieChecked && !isSeriesChecked) {
+      mediaType = 'movie';
+  } else if (!isMovieChecked && isSeriesChecked) {
+      mediaType = 'tv';
+  } else {
+      // Choose randomly if both or neither are selected
+      mediaType = Math.random() < 0.5 ? 'movie' : 'tv';
+  }
+
+  const endpoint = `${BASE_URL}/${mediaType}/top_rated`;
 
   return fetchMovieData(endpoint).then(data => {
       if (!data || !data.results) {
@@ -42,6 +53,12 @@ function displayMedia(media) {
   mediaCover.style.display = 'block'; // Show the media cover
   console.log('Displaying media:', media.title || media.name);
 }
+
+document.querySelector('.generate-btn').addEventListener('click', () => {
+  getRandomMedia().then(media => {
+      displayMedia(media);
+  });
+});
 
 function getRandomMovieFromTMDb() {
   return fetchMovieData('https://api.themoviedb.org/3/movie/popular').then(data => {
