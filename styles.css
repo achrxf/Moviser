@@ -123,6 +123,19 @@ h3 {
   color: white;
 }
 
+.person-option {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.person-option:hover {
+  background-color: #f0f0f0;
+}
+
+.person-option.selected {
+  background-color: #e0e0e0;
+}
+
 .options div:hover {
   cursor: pointer;
   background-color: #cccccc;

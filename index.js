@@ -54,6 +54,11 @@ function displayMovie(movie) {
     localStorage.setItem('lastFetchedMovie', JSON.stringify({ movie, date: today }));
 }
 
+/**
+ * function getSelectedGenreIds()
+ * Retrieves the IDs of selected genres from the HTML elements with the class 'genre'.
+ * @returns {Array} - An array containing the IDs of selected genres.
+ */
 function getSelectedGenreIds() {
     const selectedGenres = [];
     const genreElements = document.querySelectorAll('.genre .options div.selected');
@@ -70,7 +75,7 @@ function getSelectedGenreIds() {
 function getRandomMedia() {
     const isMovieChecked = document.getElementById('type-movie').checked;
     const isSeriesChecked = document.getElementById('type-series').checked;
-    let mediaTypes
+    let mediaTypes;
     if (isMovieChecked && !isSeriesChecked) {
         mediaTypes = 'movie';
     } else if (!isMovieChecked && isSeriesChecked) {
@@ -79,11 +84,14 @@ function getRandomMedia() {
         mediaTypes = Math.random() < 0.5 ? 'movie' : 'tv';
     }
     const selectedGenres = getSelectedGenreIds();
+    const selectedActors = getSelectedActorIds();
     const genreQuery = selectedGenres.length > 0 ? `&with_genres=${selectedGenres.join(',')}` : '';
+    const actorQuery = selectedActors.length > 0 ? `&with_people=${selectedActors.join(',')}` : '';
     const endPoint = `${BASE_URL}/discover/${mediaTypes}`;
     const params = {
         sort_by: 'popularity.desc',
-        with_genres: selectedGenres.join(',')
+        with_genres: selectedGenres.join(','),
+        with_people: selectedActors.join(','),
     };
     return fetchMovieData(endPoint, params).then(data => {
         if (!data || !data.results) {
@@ -110,7 +118,94 @@ function displayMedia(media) {
     console.log('Displaying media:', media.title || media.name);
 }
 
-//---Button Generate---
+/**
+ * Fetches data about popular actors from TMDb API.
+ */
+function fetchPopularActors() {
+    const url = `${BASE_URL}/person/popular?api_key=${API_KEY}`;
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .catch(error => console.error('Error fetching popular actors:', error));
+}
+
+/**
+ * Creates a new DOM element representing an actor option.
+ * @param {Object} actor - An object containing data about the actor, including their ID and name.
+ */
+function createActorOption(actor) {
+    const option = document.createElement('div');
+    option.classList.add('actor-option');
+    option.dataset.id = actor.id;
+    option.textContent = actor.name;
+    return option;
+}
+
+/**
+ * Displays a list of popular actors on the webpage and provides functionality for selecting actors and searching for specific actors.
+ * @param {Array} actors - An array containing data about popular actors.
+ */
+function displayPopularActors(actors) {
+    const optionsContainer = document.getElementById('actor-options');
+    optionsContainer.innerHTML = '';
+    actors.forEach(actor => {
+        const option = createActorOption(actor);
+        optionsContainer.appendChild(option);
+        option.addEventListener('click', () => {
+            option.classList.toggle('selected');
+        });
+    });
+
+    const actorSearchInput = document.getElementById('actor-search');
+    actorSearchInput.addEventListener('input', () => {
+        const filter = actorSearchInput.value.toLowerCase();
+        actors.forEach(actor => {
+            const option = document.querySelector(`.actor-option[data-id="${actor.id}"]`);
+            if (!option) {
+                console.log(`Option not found for actor with ID ${actor.id}`);
+                return;
+            }
+            if (actor.name.toLowerCase().includes(filter)) {
+                option.style.display = '';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+    });
+}
+
+/**
+ * Fetches data about popular actors from TMDb API and displays them on the webpage.
+ */
+fetchPopularActors()
+    .then(data => {
+        if (data && data.results) {
+            displayPopularActors(data.results);
+        }
+});
+
+/**
+ * Adds an event listener to execute code when the DOM content is fully loaded.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    fetchPopularActors();
+});
+
+/**
+ * Retrieves the IDs of selected actors from the HTML elements.
+ */
+function getSelectedActorIds() {
+    const selectedActors = [];
+    const actorElements = document.querySelectorAll('.actor-option.selected');
+    actorElements.forEach(actorElement => {
+        selectedActors.push(actorElement.dataset.id);
+    });
+    return selectedActors;
+}
 
 /**
  * Adds an event listener to the button Generate.
@@ -121,8 +216,6 @@ document.querySelector('.generate-btn').addEventListener('click', () => {
         displayMedia(media);
     });
   });
-
-//---Button Todays pick---
 
 /**
  * Adds an event listener to the button Todays pick.
@@ -150,6 +243,9 @@ function fetchAndDisplayRandomMovie() {
   }
 }
 
+/**
+ * Adds event listeners for genre selection and search functionality.
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const genreSearchInput = document.getElementById('genre-search');
     const genreOptions = document.querySelectorAll('.genre .options div');
