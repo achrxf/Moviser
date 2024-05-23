@@ -54,15 +54,38 @@ function displayMovie(movie) {
     localStorage.setItem('lastFetchedMovie', JSON.stringify({ movie, date: today }));
 }
 
+function getSelectedGenreIds() {
+    const selectedGenres = [];
+    const genreElements = document.querySelectorAll('.genre .options div.selected');
+    genreElements.forEach(genreElement => {
+        selectedGenres.push(genreElement.getAttribute('data-id'));
+    });
+    return selectedGenres;
+}
+
 /**
  * function getRandomMedia()
  * Fetches a list of media from TMDb and returns a random movie or TV show.
  */
 function getRandomMedia() {
-    const mediaType = Math.random() < 0.5 ? 'movie' : 'tv';
-    const endpoint = `https://api.themoviedb.org/3/${mediaType}/top_rated`;
-  
-    return fetchMovieData(endpoint).then(data => {
+    const isMovieChecked = document.getElementById('type-movie').checked;
+    const isSeriesChecked = document.getElementById('type-series').checked;
+    let mediaTypes
+    if (isMovieChecked && !isSeriesChecked) {
+        mediaTypes = 'movie';
+    } else if (!isMovieChecked && isSeriesChecked) {
+        mediaTypes = 'tv';
+    } else {
+        mediaTypes = Math.random() < 0.5 ? 'movie' : 'tv';
+    }
+    const selectedGenres = getSelectedGenreIds();
+    const genreQuery = selectedGenres.length > 0 ? `&with_genres=${selectedGenres.join(',')}` : '';
+    const endPoint = `${BASE_URL}/${mediaTypes}/top_rated`;
+    const params = {
+        sort_by: 'popularity.desc',
+        with_genres: selectedGenres.join(',')
+    };
+    return fetchMovieData(endPoint, params).then(data => {
         if (!data || !data.results) {
             return null;
         }
@@ -87,15 +110,17 @@ function displayMedia(media) {
     console.log('Displaying media:', media.title || media.name);
 }
 
+//---Button Generate---
+
 /**
  * Adds an event listener to the button Generate.
  * When the button is clicked, it fetches and displays a random media for now.
  */
 document.querySelector('.generate-btn').addEventListener('click', () => {
-    getRandomMedia('movie', 'day').then(media => {
+    getRandomMedia().then(media => {
         displayMedia(media);
     });
-});
+  });
 
 //---Button Todays pick---
 
@@ -124,3 +149,25 @@ function fetchAndDisplayRandomMovie() {
       });
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const genreSearchInput = document.getElementById('genre-search');
+    const genreOptions = document.querySelectorAll('.genre .options div');
+
+    genreOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            option.classList.toggle('selected');
+        });
+    });
+
+    genreSearchInput.addEventListener('input', () => {
+        const filter = genreSearchInput.value.toLowerCase();
+        genreOptions.forEach(option => {
+            if (option.textContent.toLowerCase().includes(filter)) {
+                option.style.display = '';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+    });
+});
