@@ -232,15 +232,19 @@ document.querySelector('.todays-pick-btn').addEventListener('click', () => {
  * a new random movie from TMDb and displays it.
  */
 function fetchAndDisplayRandomMovie() {
-  const lastFetchedMovie = JSON.parse(localStorage.getItem('lastFetchedMovie'));
-  const today = new Date().toLocaleDateString();
-  if (lastFetchedMovie && lastFetchedMovie.date === today) {
-      displayMovie(lastFetchedMovie.movie);
-  } else {
-      getRandomMovieFromTMDb().then(movie => {
-          displayMovie(movie);
-      });
-  }
+    const lastFetchedMovie = JSON.parse(localStorage.getItem('lastFetchedMovie'));
+    const today = new Date().toLocaleDateString();
+    if (lastFetchedMovie && lastFetchedMovie.date === today) {
+        displayMedia(lastFetchedMovie.movie);
+    } else {
+        getRandomMovieFromTMDb().then(movie => {
+            if (movie) {
+                const today = new Date().toLocaleDateString();
+                localStorage.setItem('lastFetchedMovie', JSON.stringify({ movie, date: today }));
+                displayMedia(movie);
+            }
+        });
+    }
 }
 
 /**
@@ -267,3 +271,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+//------------------
+
+/**
+ * Displays a given movie or TV show on the webpage.
+ * @param {Object} media - The media object containing details such as `title`, `name`, and `overview`.
+ */
+function displayMedia(media) {
+    if (!media) {
+        console.error('No media found to display');
+        return;
+    }
+    const mediaName = media.title || media.name;
+    const mediaDescription = media.overview;
+    const detailsHeading = document.querySelector('.details h3');
+    const detailsParagraph = document.querySelector('.details .paragraph');
+    
+    // Set the media name as the heading text
+    detailsHeading.textContent = mediaName;
+    
+    // Set the media description as the paragraph text
+    detailsParagraph.textContent = mediaDescription;
+    
+    const mediaCover = document.getElementById('movie-cover');
+    mediaCover.src = `${IMAGE_BASE_URL}${media.poster_path || media.backdrop_path}`;
+    mediaCover.style.display = 'block';
+    console.log('Displaying media:', mediaName);
+}
+
+/**
+ * Fetches and displays a random media (either a movie or a TV show).
+ */
+function fetchAndDisplayRandomMedia() {
+    getRandomMedia().then(media => {
+        displayMedia(media);
+    });
+}

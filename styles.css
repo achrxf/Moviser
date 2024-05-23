@@ -89,6 +89,34 @@ h3 {
   top: -15%;
 }
 
+.details {
+  background-color: #d9d9d9;
+  height: 70%;
+  width: 100%;
+  border: black;
+  border-style: solid;
+  border-radius: 15px;
+  box-shadow: 10px 10px 20px black;
+  position: relative;
+  top: -15%;
+}
+
+.details p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 5;
+  line-height: 1.5;
+  max-height: calc(1.5em * 5);
+}
+
+
+.paragraph {
+  width: 90%;
+  padding-left: 7%;
+}
+
 .align-input {
   text-align: center;
   height: 100%;
@@ -123,19 +151,6 @@ h3 {
   color: white;
 }
 
-.person-option {
-  cursor: pointer;
-  padding: 5px;
-}
-
-.person-option:hover {
-  background-color: #f0f0f0;
-}
-
-.person-option.selected {
-  background-color: #e0e0e0;
-}
-
 .options div:hover {
   cursor: pointer;
   background-color: #cccccc;
@@ -168,18 +183,6 @@ h3 {
   border-radius: 15px;
   box-shadow: 10px 10px 20px black;
   position: relative;
-}
-
-.directors {
-  background-color: #d9d9d9;
-  height: 70%;
-  width: 100%;
-  border: black;
-  border-style: solid;
-  border-radius: 15px;
-  box-shadow: 10px 10px 20px black;
-  position: relative;
-  top: -15%;
 }
 
 .main {
