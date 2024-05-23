@@ -80,7 +80,7 @@ function getRandomMedia() {
     }
     const selectedGenres = getSelectedGenreIds();
     const genreQuery = selectedGenres.length > 0 ? `&with_genres=${selectedGenres.join(',')}` : '';
-    const endPoint = `${BASE_URL}/${mediaTypes}/top_rated`;
+    const endPoint = `${BASE_URL}/discover/${mediaTypes}`;
     const params = {
         sort_by: 'popularity.desc',
         with_genres: selectedGenres.join(',')
