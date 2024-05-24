@@ -83,16 +83,24 @@ function getRandomMedia() {
     } else {
         mediaTypes = Math.random() < 0.5 ? 'movie' : 'tv';
     }
+
     const selectedGenres = getSelectedGenreIds();
     const selectedActors = getSelectedActorIds();
-    const genreQuery = selectedGenres.length > 0 ? `&with_genres=${selectedGenres.join(',')}` : '';
+    const selectedMode = getSelectedMode();
+    const modeGenres = selectedMode ? modeToGenreMapping[selectedMode] : [];
+
+    // Combine selected genres with mode-based genres
+    const genres = [...new Set([...selectedGenres, ...modeGenres])];
+    const genreQuery = genres.length > 0 ? `&with_genres=${genres.join(',')}` : '';
     const actorQuery = selectedActors.length > 0 ? `&with_people=${selectedActors.join(',')}` : '';
+
     const endPoint = `${BASE_URL}/discover/${mediaTypes}`;
     const params = {
         sort_by: 'popularity.desc',
-        with_genres: selectedGenres.join(','),
-        with_people: selectedActors.join(','),
+        with_genres: genres.join(','),
+        with_people: selectedActors.join(',')
     };
+
     return fetchMovieData(endPoint, params).then(data => {
         if (!data || !data.results) {
             return null;
@@ -215,7 +223,7 @@ document.querySelector('.generate-btn').addEventListener('click', () => {
     getRandomMedia().then(media => {
         displayMedia(media);
     });
-  });
+});
 
 /**
  * Adds an event listener to the button Todays pick.
@@ -308,3 +316,22 @@ function fetchAndDisplayRandomMedia() {
         displayMedia(media);
     });
 }
+
+//--------------------
+
+const modeToGenreMapping = {
+    happy: [35], // Comedy
+    neutral: [], // No specific genre
+    sad: [18] // Drama
+};
+
+function getSelectedMode() {
+    const modes = document.getElementsByName('mode');
+    for (let i = 0; i < modes.length; i++) {
+        if (modes[i].checked) {
+            return modes[i].value;
+        }
+    }
+    return null;
+}
+
