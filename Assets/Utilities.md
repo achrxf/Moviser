@@ -34,7 +34,7 @@ This document contains the design guidelines and utilities used in the project, 
 
 - **Black**: #000000
 - **White**: #FFFFFF
-- **Light gray**: ADAAAA
-- **Dark gray**: 0E0E0E
-- **Dark red**: 580F0F
-- **Button white**: CAC7C7
+- **Light gray**: #ADAAAA
+- **Dark gray**: #0E0E0E
+- **Dark red**: #580F0F
+- **Button white**: #CAC7C7

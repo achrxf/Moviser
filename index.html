@@ -12,9 +12,103 @@
   <link href="Styles/layout.css" rel="stylesheet">
   <link href="Styles/content.css" rel="stylesheet">
   <link href="Styles/buttons.css" rel="stylesheet">
+  <link href="Assets/Moviser logo.svg" rel="icon">
   <title>Moviser</title>
 </head>
 <body>
-  
+  <main>
+    <div class="rightSide">
+      <section id="genre" class="genre">
+        <div class="coContainer">
+          <img src="Assets/Search.svg" alt="searchIcon">
+          <input type="text" id="genreSearch" class="search" placeholder="Genre...">
+        </div>
+        <div class="dropdown">
+          <div class="options">
+              <div data-id="28" data-name="Action">Action</div>
+              <div data-id="12" data-name="Adventure">Adventure</div>
+              <div data-id="16" data-name="Animation">Animation</div>
+              <div data-id="35" data-name="Comedy">Comedy</div>
+              <div data-id="80" data-name="Crime">Crime</div>
+              <div data-id="99" data-name="Documentary">Documentary</div>
+              <div data-id="18" data-name="Drama">Drama</div>
+              <div data-id="10751" data-name="Family">Family</div>
+              <div data-id="14" data-name="Fantasy">Fantasy</div>
+              <div data-id="36" data-name="History">History</div>
+              <div data-id="27" data-name="Horror">Horror</div>
+              <div data-id="10402" data-name="Music">Music</div>
+              <div data-id="9648" data-name="Mystery">Mystery</div>
+              <div data-id="10749" data-name="Romance">Romance</div>
+              <div data-id="878" data-name="Science Fiction">Science Fiction</div>
+              <div data-id="10770" data-name="TV Movie">TV Movie</div>
+              <div data-id="53" data-name="Thriller">Thriller</div>
+              <div data-id="10752" data-name="War">War</div>
+              <div data-id="37" data-name="Western">Western</div>
+          </div>
+      </div>
+      </section>
+      <section id="actor">
+        <div class="coContainer">
+          <img src="Assets/Search.svg" alt="searchIcon">
+          <input type="text" id="actorSearch" class="search" placeholder="Actor...">
+        </div>
+        <div class="options" id="actorOptions"></div>
+      </section>
+    </div>
+    <div class="middle">
+      <section id="mainGenerater">
+        <div id="movieDisplay" class="movieDisplay">
+          <img id="movieCover" class="movieCover" src="" alt="Movie Cover" />
+      </div>
+        <img id="logo" src="Assets/Moviser logo.svg" alt="websiteLogo">
+        <button class="genButton">Generate</button>
+      </section>
+      <div id="coMain">
+        <button class="mwtButton">Must-Watch Today</button>
+      </div>
+    </div>
+    <div class="leftSide">
+      <div class="upperLeftSide">
+        <section id="type">
+          <div class="coContainer">
+            <p>Type</p>
+          </div>
+            <div class="typeOptions">
+                <input type="checkbox" class="switch" id="typeMovie" name="type" value="movie">
+                <label for="typeMovie">Movie</label>
+            </div>
+            <div class="typeOptions">
+                <input type="checkbox" class="switch" id="typeTVshow" name="type" value="TVshow">
+                <label for="typeTVshow">TV Show</label>
+            </div>
+        </section>
+        <section id="mode">
+          <div class="coContainer">
+            <p>Mode</p>
+          </div>
+          <div class="modeOptions">
+            <input type="radio" id="happy" name="mode" value="happy">
+            <label for="happy">Happy</label>
+        </div>
+        <div class="modeOptions">
+            <input type="radio" id="neutral" name="mode" value="neutral">
+            <label for="neutral">Neutral</label>
+        </div>
+        <div class="modeOptions">
+            <input type="radio" id="sad" name="mode" value="sad">
+            <label for="sad">Sad</label>
+        </div>
+        </section>
+      </div>
+      <section id="about" class="about">
+        <div class="coContainer">
+          <img src="Assets/About.svg" alt="AboutIcon">
+          <p class="mediaName">About the media</p>
+        </div>
+        <p class="paragraph"></p>
+      </section>
+    </div>
+  </main>
+  <script src="script.js"></script>
 </body>
 </html>

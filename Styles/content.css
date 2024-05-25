@@ -1,0 +1,251 @@
+.search {
+  height: 50px;
+  width: 100%;
+  background: none;
+  border: none;
+  font-family: inter, Arial, sans-serif;
+  color: #FFFFFF;
+  font-size: 16px;
+  letter-spacing: 3px;
+  padding-left: 20px;
+}
+
+.search::placeholder {
+  font-family: inter, Arial, sans-serif;
+  color: #d4d4d4;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+.rightSide img {
+  padding-left: 30px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10%;
+  padding-top: 3%;
+  max-height: 70%;
+  overflow-y: auto;
+  position: absolute;
+  width: 90%;
+  border: none;
+  z-index: 1000;
+}
+
+.options div.selected {
+  color: #580F0F;
+  font-weight: bolder;
+  font-style: oblique;
+  padding-left: 3%;
+}
+
+.options div:hover {
+  cursor: pointer;
+  color: #580F0F;
+}
+
+.options::-webkit-scrollbar {
+  width: 10px;
+}
+.options::-webkit-scrollbar-thumb {
+  background: #CAC7C7;
+  border-radius: 10px;
+}
+
+.options::-webkit-scrollbar-thumb:hover {
+  background: #580F0F;
+  cursor: pointer;
+}
+
+.options div {
+  padding-bottom: 2%;
+}
+
+/********************Genre*******************/
+
+#genre {
+  position: relative;
+}
+
+/********************Actor*******************/
+
+#actor {
+  position: relative;
+}
+
+/********************Main*******************/
+
+.movieDisplay {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 75%;
+}
+
+.movieCover {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: none;
+}
+
+#mainGenerater img {
+  width: 80%;
+  height: auto;
+  margin-top: 30%;
+}
+
+.genButton, .mwtButton {
+  width: 70%;
+  height: 50px;
+  background-color: #CAC7C7;
+  font-family: inter, Arial, sans-serif;
+  color: #000000;
+  font-size: 16px;
+  letter-spacing: 3px;
+  border: none;
+  border-radius: 5px;
+}
+
+.genButton:hover, .mwtButton:hover {
+  cursor: pointer;
+  background-color: #580F0F;
+  width: 69%;
+  height: 49px;
+  color: #FFFFFF;
+  transition: all 0.5s 0.1s;
+}
+
+.genButton:active, .mwtButton:active {
+  opacity: 0.1;
+}
+
+.genButton {
+  margin-bottom: 10%;
+}
+
+.mwtButton {
+  margin-top: 10%;
+}
+
+/********************Type*******************/
+
+.typeOptions {
+  margin-top: 20%;
+  margin-left: 25%;
+  display: flex;
+}
+
+.typeOptions label {
+  padding-left: 7%;
+  cursor: pointer;
+}
+
+.switch {
+  position: relative;
+  height: 1rem;
+  width: 2rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 9999px;
+  background-color: #ADAAAA;
+  transition: all .3s ease;
+}
+
+.switch:checked {
+  background-color: #580F0F;
+}
+
+.switch::before {
+  position: absolute;
+  content: "";
+  left: calc(1.5rem - 1.6rem);
+  top: calc(1.5rem - 1.6rem);
+  display: block;
+  height: 1rem;
+  width: 1rem;
+  cursor: pointer;
+  border: 1px solid rgba(100, 116, 139, 0.527);
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+  transition: all .3s ease;
+}
+
+.switch:hover::before {
+  box-shadow: 0 0 0px 8px rgba(0, 0, 0, .15)
+}
+
+.switch:checked:hover::before {
+  box-shadow: 0 0 0px 8px rgba(88, 15, 15, .15)
+}
+
+.switch:checked:before {
+  transform: translateX(100%);
+  border-color: #580F0F;
+}
+
+/********************Mode*******************/
+
+.modeOptions {
+  margin-top: 13%;
+  margin-left: 25%;
+  display: flex;
+}
+
+.modeOptions label {
+  padding-left: 7%;
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #FFFFFF;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input[type="radio"]:hover {
+  cursor: pointer;
+}
+
+input[type="radio"]:checked {
+  background-color: #580F0F;
+}
+
+/********************About*******************/
+
+.paragraph {
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 1%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 6;
+  line-height: 1.5;
+  max-height: calc(1.5em * 6);
+}
+
+#about .coContainer {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+  padding-left: 30px;
+}
