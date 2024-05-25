@@ -130,3 +130,26 @@ main {
   margin-top: -5%;
   box-shadow: 10px 10px 30px #000000;
 }
+
+/********************Phone*******************/
+
+@media screen and (max-width: 767px) {
+  
+  .rightSide, .leftSide {
+    display: none;
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .middle, #mainGenerater {
+    width: 100%;
+    height: 100%;
+  }
+  #coMain {
+    width: 100%;
+  }
+}
