@@ -7,6 +7,7 @@ This document contains the design guidelines and utilities used in the project, 
 ### Fonts
 - **Primary Font**: Inter
 - **Logo Font**: Alex Brush
+- **Landing page**: Caveat
 
 ### Font Sizes
 - **Paragraph Font Size**: 16px
@@ -29,6 +30,10 @@ This document contains the design guidelines and utilities used in the project, 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+- **Caveat**:
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
 
 ## Colors
 

@@ -1,0 +1,151 @@
+body {
+  background-color: #0E0E0E;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-family: inter, Arial, sans-serif;
+  color: #FFFFFF;
+  letter-spacing: 3px;
+  line-height: 50px;
+}
+
+/**************Hero section*****************/
+
+.moviesImage {
+  opacity: 0.5;
+  border-radius: 5px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hero div {
+  margin-left: 10%;
+  margin-top: 10%;
+}
+
+.hero h1 {
+  margin-left: 30%;
+}
+
+.hero button {
+  width: 300px;
+  margin-top: 5%;
+  margin-left: 75%;
+  background: none;
+  padding: 2%;
+  border: #FFFFFF solid;
+  border-radius: 10px;
+  font-family: inter, Arial, sans-serif;
+  color: #FFFFFF;
+  letter-spacing: 3px;
+  font-size: 16px;
+}
+
+.hero button:hover {
+  border: #580F0F solid;
+  color: #580F0F;
+  cursor: pointer;
+}
+
+.hero button:active {
+  background-color: #FFFFFF;
+}
+
+/**************Personalized Recommendations*****************/
+
+.personalizedRecommendations {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personalizedRecommendations img {
+  margin-top: -7%;
+}
+
+.personalizedRecommendations div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 5%;
+}
+
+h3 {
+  font-family: caveat, Arial, sans-serif;
+  color: #580F0F;
+  font-size: 50px;
+}
+
+p {
+  width: 500px;
+}
+
+/**************Mood-Based Selection*****************/
+
+.mood-BasedSelection {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 5%;
+}
+
+.mood-BasedSelection div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/**************Genre and Actor Filters*****************/
+
+.genreAndActorFilters {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 5%;
+}
+
+/**************Inspiration for the Project*****************/
+
+.inspiration {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inspiration p {
+  width: 1500px;
+}
+
+/**************GitHub Repository*****************/
+
+.repository {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+.repository p {
+  margin-left: 5%;
+  width: 800px;
+}
+
+.repository a {
+  color: #FFFFFF;
+}
+
+.repository a:hover {
+  color: #580F0F;
+}
+
+.repository a:active {
+  font-weight: bold;
+}
